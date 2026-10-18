@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authore | Books Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="topbar">
+    <div>
+      <button type="button" data-open="membership">Membership</button>
+      <button type="button" data-open="offer">Weekly Offer</button>
+      <button type="button" data-open="latest">Latest Release</button>
+    </div>
+    <div>
+      <!-- the label becomes the user's name after log in -->
+      <div class="account-menu-wrap">
+        <a href="#account" id="accountLink" aria-haspopup="menu" aria-expanded="false"><i data-lucide="user-round"></i> <span id="accountLabel">My Account</span></a>
+        <!-- shown when a logged-in user clicks their name: the only option is Log out -->
+        <div class="account-menu" id="accountMenu" role="menu" hidden>
+          <button type="button" id="logoutButton" role="menuitem"><i data-lucide="log-out"></i> Log out</button>
+        </div>
+      </div>
+      <a href="#favorites" id="favoritesLink"><i data-lucide="heart"></i> My Favorites <span class="count-pill" id="favCount" hidden>0</span></a>
+    </div>
+  </div>
+
+  <header class="header">
+    <a class="logo" href="#home">
+      <i data-lucide="book-open"></i>
+      <span><b>Authore</b><small>BOOKS STORES</small></span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <i data-lucide="menu"></i>
+    </button>
+
+    <nav class="nav">
+      <a class="active" href="#home">Home⌄</a>
+      <a href="#bestsellers">Shop⌄</a>
+      <a href="#categories">Elements⌄</a>
+      <a href="#categories">Page⌄</a>
+      <a href="#reviews">Reviews⌄</a>
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" id="storesButton"><i data-lucide="map-pin"></i> <span class="hide-sm">Book stores</span></button>
+      <button type="button" id="cartButton"><i data-lucide="shopping-bag"></i> Cart <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO AND SEARCH -->
+    <section class="hero" id="home">
+      <h1>Discover &amp; Read <em>1 Million</em> Books</h1>
+
+      <form class="search-box" id="searchForm" autocomplete="off">
+        <label class="category-select">
+          <i data-lucide="grid-2x2"></i>
+          <select id="categorySelect" aria-label="Choose category">
+            <option value="all">All Categories</option>
+            <option value="art">Art &amp; Design</option>
+            <option value="business">Business</option>
+            <option value="technology">IT &amp; Technology</option>
+            <option value="financial">Financial</option>
+            <option value="audio">Audio Books</option>
+            <option value="medicine">Medicine</option>
+            <option value="science">Science</option>
+            <option value="novel">Novel</option>
+          </select>
+        </label>
+        <input type="search" id="searchInput" placeholder="Type a book title..." aria-label="Search books"
+               role="combobox" aria-autocomplete="list" aria-controls="suggestions" aria-expanded="false">
+        <button type="submit" aria-label="Search"><i data-lucide="search"></i></button>
+        <ul class="suggestions" id="suggestions" role="listbox" hidden></ul>
+      </form>
+
+      <!-- Static book shelf (11 covers) drawn by js/script.js. Click a book for details. -->
+      <div class="book-stage" id="bookStage" aria-label="Featured books"></div>
+    </section>
+
+    <!-- PUBLISHER LOGOS
+         These are original line-art marks matched to each name. To use an official logo,
+         replace the <svg> inside a block with <img src="images/logos/yourfile.svg" alt="Name"> -->
+    <section class="publishers">
+      <div title="Bookdiscus">
+        <svg class="pub-logo" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M4 12c7-3 14-2 20 3 6-5 13-6 20-3v26c-7-3-14-2-20 3-6-5-13-6-20-3z"/>
+          <path d="M24 15v26"/>
+          <circle cx="34" cy="26" r="5.5"/>
+          <circle class="dot" cx="34" cy="26" r="1.3"/>
+          <path d="M10 20c3-1 6-1 9 1M10 27c3-1 6-1 9 1"/>
+        </svg>
+        <span>BOOKDISCUS</span>
+      </div>
+      <div title="Higginbotham Bookshop">
+        <svg class="pub-logo" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M6 19 9 7h30l3 12z"/>
+          <path d="M6 19c0 3 3.5 4.5 6 4.5s6-1.5 6-4.5c0 3 3.5 4.5 6 4.5s6-1.5 6-4.5c0 3 3.5 4.5 6 4.5s6-1.5 6-4.5"/>
+          <path d="M9 24v18h30V24"/>
+          <path d="M14 30v8M18 29v9M22 31v7"/>
+          <path d="M29 42V30h6v12"/>
+          <path d="M5 42h38"/>
+        </svg>
+        <span>HIGGINBOTHAM<small>BOOK SHOP</small></span>
+      </div>
+      <div title="Sharing">
+        <svg class="pub-logo" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M16 12h16v24H16z"/>
+          <path d="M20 12v24"/>
+          <path d="M3 20h9M7 16l-4 4 4 4"/>
+          <path d="M45 30h-9M41 26l4 4-4 4"/>
+          <path d="M24 18h5M24 23h5"/>
+        </svg>
+        <span>SHARING</span>
+      </div>
+      <div title="Library">
+        <svg class="pub-logo" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M4 17 24 6l20 11z"/>
+          <circle cx="24" cy="12.5" r="2"/>
+          <path d="M10 21v15M19 21v15M29 21v15M38 21v15"/>
+          <path d="M6 36h36M3 41h42"/>
+        </svg>
+        <span>LIBRARY</span>
+      </div>
+      <div title="Walrus">
+        <svg class="pub-logo" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M7 27c0-11 7-18 17-18s17 7 17 18c0 6-6 10-17 10S7 33 7 27z"/>
+          <circle class="dot" cx="16.5" cy="22" r="1.5"/>
+          <circle class="dot" cx="31.5" cy="22" r="1.5"/>
+          <ellipse cx="24" cy="29" rx="9" ry="5.5"/>
+          <path d="M24 25.5v3.5"/>
+          <circle class="dot" cx="20.5" cy="30" r=".9"/>
+          <circle class="dot" cx="27.5" cy="30" r=".9"/>
+          <path d="M18.5 33.5V43M29.5 33.5V43"/>
+        </svg>
+        <span>WALRUS</span>
+      </div>
+    </section>
+
+    
+    <section class="section categories" id="categories">
+      <div class="section-heading">
+        <div><p class="eyebrow">TOP CATEGORIES</p><h2>Explore Categories</h2></div>
+        <button type="button" class="view-all" id="categoriesViewAll">VIEW ALL →</button>
+      </div>
+
+      <div class="category-grid" id="categoryGrid"></div>
+    </section>
+
+    
+    <section class="section bestsellers" id="bestsellers">
+      <div class="section-heading">
+        <div><p class="eyebrow">BESTSELLERS</p><h2>Deciding What to Read Next?</h2></div>
+        <button type="button" class="view-all" id="viewAll">VIEW ALL →</button>
+      </div>
+
+      <div class="carousel">
+        <button type="button" class="arrow previous" id="previous" aria-label="Previous books"><i data-lucide="chevron-left"></i></button>
+        <div class="book-grid" id="bookGrid"></div>
+        <button type="button" class="arrow next" id="next" aria-label="Next books"><i data-lucide="chevron-right"></i></button>
+      </div>
+    </section>
+
+    
+    <section class="section reviews" id="reviews">
+      <div class="reviews-title"><p class="eyebrow">HAPPY READERS</p><h2>Editorial Reviews</h2></div>
+
+      <div class="review-grid" id="reviewGrid">
+        <article class="review-card">
+          <span class="avatar" style="--c:#b96068">MA</span>
+          <div><div class="stars">★★★★★</div><p>Books open new worlds and make every quiet moment an opportunity to discover something wonderful.</p><b>Mohamoud Arifa</b><small>Project Manager</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#54aa89">FM</span>
+          <div><div class="stars">★★★★★</div><p>A lovely selection of stories, useful recommendations, and a welcoming place for every kind of reader.</p><b>Fatima Mahmood</b><small>Project Manager</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#5f7a99">AM</span>
+          <div><div class="stars">★★★★★</div><p>I always find an interesting book here. The collection makes choosing my next read easy.</p><b>Alex Morgan</b><small>Book Lover</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#d58b60">SR</span>
+          <div><div class="stars">★★★★★</div><p>My students and I found so many classics here, and the weekly offers make building a classroom shelf affordable.</p><b>Sofia Reyes</b><small>Teacher</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#7b6a9b">DO</span>
+          <div><div class="stars">★★★★☆</div><p>The technology section is exactly what I needed. Clean Code and The Pragmatic Programmer on the same shelf.</p><b>Daniel Okafor</b><small>Software Engineer</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#3f6b6a">ML</span>
+          <div><div class="stars">★★★★★</div><p>The art and design picks are inspiring. I leave with a new favorite every single visit.</p><b>Mei Lin Tan</b><small>Graphic Designer</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#8c7b4a">JS</span>
+          <div><div class="stars">★★★★★</div><p>Business and finance are well curated, and the membership discount pays for itself within a month.</p><b>Jorge Santos</b><small>Entrepreneur</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#b96068">HB</span>
+          <div><div class="stars">★★★★☆</div><p>The medicine and memoir collections kept me company on every commute, and the audio books are a great bonus.</p><b>Hannah Becker</b><small>Nurse</small></div>
+        </article>
+        <article class="review-card">
+          <span class="avatar" style="--c:#54aa89">RP</span>
+          <div><div class="stars">★★★★★</div><p>Search is quick, and the suggestions helped me find a title even when I only remembered part of the name.</p><b>Ravi Patel</b><small>Student</small></div>
+        </article>
+      </div>
+
+      <div class="review-nav">
+        <button type="button" class="review-arrow" id="reviewPrev" aria-label="Previous reviews"><i data-lucide="chevron-left"></i></button>
+        <div class="review-dots" id="reviewDots"></div>
+        <button type="button" class="review-arrow" id="reviewNext" aria-label="Next reviews"><i data-lucide="chevron-right"></i></button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>© 2026 Authore Books Store</small>
+  </footer>
+
+  
+  <div class="modal" id="modal" hidden>
+    <div class="modal-panel" id="modalPanel" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <button type="button" class="modal-icon-btn" id="modalBack" aria-label="Back" hidden><i data-lucide="arrow-left"></i></button>
+        <h2 id="modalTitle"></h2>
+        <button type="button" class="modal-icon-btn" id="modalClose" aria-label="Close"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/script.js"></script>
+</body>
+</html>
